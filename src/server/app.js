@@ -28,7 +28,6 @@ const start = () => {
 		saveUninitialized: true,
 		cookie: {
 			maxAge: process.env.NODE_ENV === 'production' ? 600 * 1000 : null,
-			secure: true,
 		},
 	};
 
