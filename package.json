@@ -1,0 +1,41 @@
+{
+	"name": "@wishy-gift/todo-react-redux-noscript",
+	"version": "0.0.1",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"build-server": "parcel build src/server/index.js --target node --out-file server.js",
+		"build-client": "parcel build src/client/index.js --out-dir public --out-file client.js --public-url /static/",
+		"build": "npm run build-server && npm run build-client",
+		"watch-server": "parcel watch src/server/index.js --target node --out-file server.js",
+		"watch-client": "parcel watch src/client/index.js --out-dir public --out-file client.js --public-url /static/",
+		"start": "npm run build && node dist/server.js"
+	},
+	"author": "",
+	"license": "MIT",
+	"dependencies": {
+		"@babel/core": "^7.9.6",
+		"@babel/plugin-syntax-dynamic-import": "^7.8.3",
+		"@babel/plugin-syntax-jsx": "^7.8.3",
+		"@babel/preset-env": "^7.9.6",
+		"@babel/preset-react": "^7.9.4",
+		"@babel/register": "^7.9.0",
+		"body-parser": "^1.19.0",
+		"classnames": "^2.2.6",
+		"devalue": "^2.0.1",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"express-session": "^1.17.1",
+		"form-serialize": "^0.7.2",
+		"nanoid": "^3.1.9",
+		"prettier": "^2.0.5",
+		"prop-types": "^15.7.2",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1",
+		"react-redux": "^7.2.0",
+		"redux": "^4.0.5",
+		"serve-static": "^1.14.1",
+		"throng": "^4.0.0",
+		"todomvc-app-css": "^2.3.0"
+	}
+}
