@@ -67,10 +67,10 @@ const App = ({ todos, visibilityFilter }) => {
 			<section className="main">
 				<Button
 					wrapperClassName={classNames('toggle-all-wrapper', {
-						checked: !incompleteTodosCount,
+						checked: todos.length && !incompleteTodosCount,
 					})}
 					className={classNames('toggle-all', {
-						checked: !incompleteTodosCount,
+						checked: todos.length && !incompleteTodosCount,
 					})}
 					action={toggleAllTodos()}
 				/>
