@@ -18,7 +18,7 @@ const serverRenderer = (isNoscript) => (req, res) => {
 		}
 
 		const { type, payload, payloadType } = req.body;
-		console.log('req.body', req.body);
+
 		if (type) {
 			try {
 				let parsedPayload;

@@ -26,11 +26,7 @@ const Form = ({
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
-		console.log('event.target', event.target);
-
 		const { payload } = serialize(event.target, { hash: true });
-
-		console.log('payload', payload);
 
 		dispatch({
 			type: actionType,

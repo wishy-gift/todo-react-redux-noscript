@@ -9,10 +9,10 @@
 	"scripts": {
 		"build-server": "parcel build src/server/index.js --target node --out-file server.js",
 		"build-client": "parcel build src/client/index.js --out-dir public --out-file client.js --public-url /static/",
-		"build": "npm run build-server && npm run build-client",
+		"build": "cross-env NODE_ENV=production npm run build-server && cross-env NODE_ENV=production npm run build-client",
 		"watch-server": "parcel watch src/server/index.js --target node --out-file server.js",
 		"watch-client": "parcel watch src/client/index.js --out-dir public --out-file client.js --public-url /static/",
-		"start": "cross-env node dist/server.js"
+		"start": "cross-env NODE_ENV=production node dist/server.js"
 	},
 	"author": "",
 	"license": "MIT",

@@ -27,7 +27,7 @@ const start = () => {
 		resave: false,
 		saveUninitialized: true,
 		cookie: {
-			maxAge: process.env.NODE_ENV === 'production' ? 600 : null,
+			maxAge: process.env.NODE_ENV === 'production' ? 600 * 1000 : null,
 			secure: true,
 		},
 	};
