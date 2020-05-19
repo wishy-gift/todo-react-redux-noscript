@@ -28,6 +28,7 @@ const start = () => {
 		saveUninitialized: true,
 		cookie: {
 			maxAge: process.env.NODE_ENV === 'production' ? 600 : null,
+			secure: true,
 		},
 	};
 
@@ -35,6 +36,7 @@ const start = () => {
 		sessionConfig.store = new RedisStore({ client: redisClient });
 	}
 
+	app.set('trustproxy', true);
 	app.use(session(sessionConfig));
 
 	app.use(bodyParser.json());
