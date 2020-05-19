@@ -2,6 +2,9 @@ import path from 'path';
 import * as express from 'express';
 import bodyParser from 'body-parser';
 import session from 'express-session';
+import redis from 'redis';
+import connectRedis from 'connect-redis';
+const RedisStore = connectRedis(session);
 
 import serverRenderer from './middleware/serverRenderer';
 
@@ -11,16 +14,28 @@ const start = () => {
 	app.use('/static/', express.static(path.join(__dirname, '..', 'public')));
 
 	// TODO: Connect to redis here instead of using memory store
-	app.use(
-		session({
-			secret: 'keyboard cat',
-			resave: false,
-			saveUninitialized: true,
-			cookie: {
-				maxAge: process.env.NODE_ENV === 'production' ? 600 : null,
-			},
-		})
-	);
+
+	const redisClient = process.env.REDIS_URL
+		? redis.createClient({
+				url: process.env.REDIS_URL,
+		  })
+		: null;
+
+	const sessionConfig = {
+		secret:
+			'4#ecwNjsNdcM$7yH@QGS%w4i##^W!eFZwT4xcpPYX@2aFPg7%A3bZhXja74Kvfc39zv8WwC6',
+		resave: false,
+		saveUninitialized: true,
+		cookie: {
+			maxAge: process.env.NODE_ENV === 'production' ? 600 : null,
+		},
+	};
+
+	if (redisClient) {
+		sessionConfig.store = new RedisStore({ client: redisClient });
+	}
+
+	app.use(session(sessionConfig));
 
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
