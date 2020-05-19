@@ -8,18 +8,7 @@ import {
 	CLEAR_COMPLETED_TODOS,
 } from '../actions';
 
-const defaultState = [
-	{
-		id: 1,
-		text: 'Taste JavaScript',
-		completed: true,
-	},
-	{
-		id: 2,
-		text: 'Buy a unicorn',
-		completed: false,
-	},
-];
+const defaultState = [];
 
 export default (state = defaultState, { type, payload }) => {
 	switch (type) {

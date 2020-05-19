@@ -3,13 +3,16 @@
 	"version": "0.0.1",
 	"description": "",
 	"main": "index.js",
+	"engines": {
+		"node": "12.16.x"
+	},
 	"scripts": {
 		"build-server": "parcel build src/server/index.js --target node --out-file server.js",
 		"build-client": "parcel build src/client/index.js --out-dir public --out-file client.js --public-url /static/",
 		"build": "npm run build-server && npm run build-client",
 		"watch-server": "parcel watch src/server/index.js --target node --out-file server.js",
 		"watch-client": "parcel watch src/client/index.js --out-dir public --out-file client.js --public-url /static/",
-		"start": "npm run build && node dist/server.js"
+		"start": "cross-env node dist/server.js"
 	},
 	"author": "",
 	"license": "MIT",
@@ -22,12 +25,14 @@
 		"@babel/register": "^7.9.0",
 		"body-parser": "^1.19.0",
 		"classnames": "^2.2.6",
+		"cross-env": "^7.0.2",
 		"devalue": "^2.0.1",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
 		"express-session": "^1.17.1",
 		"form-serialize": "^0.7.2",
 		"nanoid": "^3.1.9",
+		"parcel-bundler": "^1.12.4",
 		"prettier": "^2.0.5",
 		"prop-types": "^15.7.2",
 		"react": "^16.13.1",
