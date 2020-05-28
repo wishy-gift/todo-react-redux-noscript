@@ -13,10 +13,7 @@ const HTML = ({
 		<html lang="">
 			<head>
 				<meta charSet="utf-8" />
-				<meta
-					name="viewport"
-					content="width=device-width, initial-scale=1"
-				/>
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<noscript>
 					<style>{`
 					#root {
@@ -36,20 +33,26 @@ const HTML = ({
 			</head>
 			<body>
 				<noscript>
-					<div
-						dangerouslySetInnerHTML={{ __html: noScriptContent }}
-					/>
+					<div dangerouslySetInnerHTML={{ __html: noScriptContent }} />
 				</noscript>
 				{/* eslint-disable-next-line react/no-danger */}
 				{!isNoscript && (
-					<div
-						id="root"
-						dangerouslySetInnerHTML={{ __html: content }}
-					/>
+					<div id="root" dangerouslySetInnerHTML={{ __html: content }} />
 				)}
 				{scripts.filter(Boolean).map((src) => (
 					<script key={src} src={src} />
 				))}
+				<footer class="info">
+					<p>{`Try without javascript :)`}</p>
+					<p>
+						Created by <a href="https://blog.klungo.no/">Daniel Skogly</a>
+					</p>
+					<p>
+						<a href="https://blog.klungo.no/2020/05/28/using-react-and-redux-to-acommodate-users-without-javascript/">
+							Read about this
+						</a>
+					</p>
+				</footer>
 			</body>
 		</html>
 	);

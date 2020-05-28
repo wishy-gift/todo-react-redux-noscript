@@ -5,7 +5,6 @@ import { func, string } from 'prop-types';
 import serialize from 'form-serialize';
 
 const Form = ({
-	isNoscript,
 	dispatch,
 	className,
 	actionType,
@@ -13,16 +12,6 @@ const Form = ({
 	children,
 	onSubmit = () => {},
 }) => {
-	if (isNoscript) {
-		return (
-			<form className={className} action="" method="post">
-				<input type="hidden" name="type" value={actionType} />
-				<input type="hidden" name="payloadType" value={payloadType} />
-				{children}
-			</form>
-		);
-	}
-
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
@@ -37,7 +26,9 @@ const Form = ({
 	};
 
 	return (
-		<form className={className} onSubmit={handleSubmit}>
+		<form className={className} action="" method="post" onSubmit={handleSubmit}>
+			<input type="hidden" name="type" value={actionType} />
+			<input type="hidden" name="payloadType" value={payloadType} />
 			{children}
 		</form>
 	);

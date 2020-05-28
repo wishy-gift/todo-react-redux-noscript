@@ -63,7 +63,6 @@ const App = ({ todos, visibilityFilter }) => {
 					<input type="hidden" name="payload[id]" value={nanoid()} />
 				</Form>
 			</header>
-			{/* <!-- This section should be hidden by default and shown when there are todos --> */}
 			<section className="main">
 				<Button
 					wrapperClassName={classNames('toggle-all-wrapper', {
@@ -75,7 +74,6 @@ const App = ({ todos, visibilityFilter }) => {
 					action={toggleAllTodos()}
 				/>
 				<ul className="todo-list">
-					{/* <!-- List items should get the className `editing` when editing and `completed` when marked as completed --> */}
 					{filteredTodos.map(({ id, text, completed, editing }) => (
 						<li
 							className={classNames({
@@ -86,12 +84,9 @@ const App = ({ todos, visibilityFilter }) => {
 						>
 							<div className="view">
 								<Button
-									wrapperClassName={classNames(
-										'toggleWrapper',
-										{
-											checked: completed,
-										}
-									)}
+									wrapperClassName={classNames('toggleWrapper', {
+										checked: completed,
+									})}
 									className={classNames('toggle', {
 										checked: completed,
 									})}
@@ -116,11 +111,7 @@ const App = ({ todos, visibilityFilter }) => {
 									defaultValue={text}
 									name="payload[text]"
 								/>
-								<input
-									type="hidden"
-									name="payload[id]"
-									value={id}
-								/>
+								<input type="hidden" name="payload[id]" value={id} />
 							</Form>
 							<Button
 								wrapperClassName="toggle-edit-wrapper"
@@ -131,25 +122,19 @@ const App = ({ todos, visibilityFilter }) => {
 					))}
 				</ul>
 			</section>
-			{/* <!-- This footer should hidden by default and shown when there are todos --> */}
 			<footer className="footer">
-				{/* <!-- This should be `0 items left` by default --> */}
 				<span className="todo-count">
-					<strong>{incompleteTodosCount}</strong>{' '}
-					{incompleteTodosCount.length === 1 ? 'item' : 'items'} left
+					<strong>{incompleteTodosCount}</strong>
+					{incompleteTodosCount.length === 1 ? ' item ' : ' items '}
+					left
 				</span>
-				{/* <!-- Remove this if you don't implement routing --> */}
 				<ul className="filters">
 					<li>
 						<Button
 							className={classNames('link', {
-								selected:
-									visibilityFilter ===
-									VISIBILITY_FILTERS.SHOW_ALL,
+								selected: visibilityFilter === VISIBILITY_FILTERS.SHOW_ALL,
 							})}
-							action={setVisibilityFilter(
-								VISIBILITY_FILTERS.SHOW_ALL
-							)}
+							action={setVisibilityFilter(VISIBILITY_FILTERS.SHOW_ALL)}
 						>
 							All
 						</Button>
@@ -157,13 +142,9 @@ const App = ({ todos, visibilityFilter }) => {
 					<li>
 						<Button
 							className={classNames('link', {
-								selected:
-									visibilityFilter ===
-									VISIBILITY_FILTERS.SHOW_ACTIVE,
+								selected: visibilityFilter === VISIBILITY_FILTERS.SHOW_ACTIVE,
 							})}
-							action={setVisibilityFilter(
-								VISIBILITY_FILTERS.SHOW_ACTIVE
-							)}
+							action={setVisibilityFilter(VISIBILITY_FILTERS.SHOW_ACTIVE)}
 						>
 							Active
 						</Button>
@@ -172,18 +153,14 @@ const App = ({ todos, visibilityFilter }) => {
 						<Button
 							className={classNames('link', {
 								selected:
-									visibilityFilter ===
-									VISIBILITY_FILTERS.SHOW_COMPLETED,
+									visibilityFilter === VISIBILITY_FILTERS.SHOW_COMPLETED,
 							})}
-							action={setVisibilityFilter(
-								VISIBILITY_FILTERS.SHOW_COMPLETED
-							)}
+							action={setVisibilityFilter(VISIBILITY_FILTERS.SHOW_COMPLETED)}
 						>
 							Completed
 						</Button>
 					</li>
 				</ul>
-				{/* <!-- Hidden if no completed items are left ↓ --> */}
 				<Button
 					wrapperClassName={classNames('clear-completed', {
 						visible: Boolean(completedTodos.length),
