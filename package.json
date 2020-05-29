@@ -12,7 +12,7 @@
 		"build": "cross-env NODE_ENV=production npm run build-server && cross-env NODE_ENV=production npm run build-client",
 		"watch-server": "parcel watch src/server/index.js --target node --out-file server.js",
 		"watch-client": "parcel watch src/client/index.js --out-dir public --out-file client.js --public-url /static/",
-		"start": "cross-env NODE_ENV=production nodemon dist/server.js"
+		"start": "cross-env NODE_ENV=production node dist/server.js"
 	},
 	"author": "",
 	"license": "MIT",
