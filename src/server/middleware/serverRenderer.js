@@ -19,15 +19,13 @@ const serverRenderer = (isNoscript) => (req, res) => {
 
 		const { type, payload, payloadType } = req.body;
 
-		if (type) {
+		if (type && typeof type === 'string') {
 			try {
 				let parsedPayload;
 				if (payload) {
 					if (payloadType === 'json') {
 						parsedPayload = JSON.parse(payload);
-					} else if (payloadType === 'string') {
-						parsedPayload = payload;
-					} else if (payloadType === 'object') {
+					} else if (payloadType === 'string' || payloadType === 'object') {
 						parsedPayload = payload;
 					}
 				}

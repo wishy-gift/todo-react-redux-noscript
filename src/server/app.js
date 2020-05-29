@@ -13,8 +13,6 @@ const start = () => {
 
 	app.use('/static/', express.static(path.join(__dirname, '..', 'public')));
 
-	// TODO: Connect to redis here instead of using memory store
-
 	const redisClient = process.env.REDIS_URL
 		? redis.createClient({
 				url: process.env.REDIS_URL,
