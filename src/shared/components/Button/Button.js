@@ -1,13 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { node, string, shape } from 'prop-types';
 
-const Button = ({
-	dispatch,
-	wrapperClassName,
-	className,
-	action = {},
-	children,
-}) => {
+const Button = ({ wrapperClassName, className, action = {}, children }) => {
+	const dispatch = useDispatch();
+
 	const { type, payload } = action;
 
 	const handleSubmit = (event) => {
@@ -35,6 +32,13 @@ const Button = ({
 	);
 };
 
-const mapStateToProps = ({ app: { isNoscript } }) => ({ isNoscript });
+Button.propTypes = {
+	wrapperClassName: string,
+	className: string,
+	action: shape({
+		type: string.isRequired,
+	}).isRequired,
+	children: node,
+};
 
-export default connect(mapStateToProps)(Button);
+export default Button;

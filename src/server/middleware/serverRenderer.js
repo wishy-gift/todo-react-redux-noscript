@@ -7,7 +7,7 @@ import { configureStore } from '../../shared/store/configureStore';
 import { setNoscript } from '../../shared/actions';
 
 const serverRenderer = (isNoscript) => (req, res) => {
-	const initialState = req.session.store || { app: { isNoscript } };
+	const initialState = req.session.state || { app: { isNoscript } };
 
 	const store = configureStore({ initialState });
 	const currentState = store.getState();
@@ -32,19 +32,19 @@ const serverRenderer = (isNoscript) => (req, res) => {
 
 				store.dispatch({ type, payload: parsedPayload });
 
-				req.session.store = store.getState();
+				req.session.state = store.getState();
 			} catch (error) {}
 		}
 	} else if (currentState.app.isNoscript) {
 		store.dispatch(setNoscript(false));
-		req.session.store = store.getState();
+		req.session.state = store.getState();
 	}
 
 	let state;
 	let content;
 
 	if (!isNoscript) {
-		state = JSON.stringify(req.session.store);
+		state = JSON.stringify(req.session.state);
 
 		content = renderToString(
 			<Provider store={store}>

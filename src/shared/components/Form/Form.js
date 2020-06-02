@@ -1,20 +1,23 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import classNames from 'classnames';
-import { func, string } from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { string, oneOf, node, func } from 'prop-types';
 import serialize from 'form-serialize';
 
 const Form = ({
-	dispatch,
-	className,
 	actionType,
-	payloadType = 'object',
 	children,
+	className,
 	onSubmit = () => {},
+	payloadType = 'object',
 }) => {
+	const dispatch = useDispatch();
+
 	const handleSubmit = (event) => {
+		// If this runs, we're client side and want to update things there instead of doing the POST request
 		event.preventDefault();
 
+		// This is done by `body-parser` on the server, `form-serialize` gives us an easy way to do it client side
+		// so that we can keep the API the same
 		const { payload } = serialize(event.target, { hash: true });
 
 		dispatch({
@@ -36,8 +39,10 @@ const Form = ({
 
 Form.propTypes = {
 	actionType: string.isRequired,
+	children: node,
+	className: string,
+	onSubmit: func, // for potential side-effects client side
+	payloadType: oneOf(['string', 'object', 'json']), // so we know how to treat the payload server-side
 };
 
-const mapStateToProps = ({ app: { isNoscript } }) => ({ isNoscript });
-
-export default connect(mapStateToProps)(Form);
+export default Form;

@@ -39,18 +39,6 @@ const start = () => {
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
 
-	// const addStore = (req, res, next) => {
-	// 	console.log('req.session.store', req.session.store);
-	// 	req.session.store = req.session.store || {};
-	// 	res.locals.store = configureStore({ initialState: req.session.store });
-	// 	if (typeof next !== 'function') {
-	// 		throw new Error('Next handler is missing');
-	// 	}
-	// 	next();
-	// };
-
-	// app.use(addStore);
-
 	app.get('/', serverRenderer());
 
 	// TODO: Add api route for actions, and a redux middleware that calls the api with the action so that data is always in sync regardless of noscript or not

@@ -52,6 +52,10 @@ const HTML = ({
 							Read about this
 						</a>
 					</p>
+					<p>
+						{`Check out the source code on `}
+						<a href="">GitHub</a>
+					</p>
 				</footer>
 			</body>
 		</html>

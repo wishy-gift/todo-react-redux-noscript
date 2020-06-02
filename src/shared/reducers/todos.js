@@ -52,14 +52,10 @@ export default (state = defaultState, { type, payload }) => {
 			);
 
 		case TOGGLE_EDIT_TODO:
-			return state.map((todo) =>
-				todo.id === payload.id
-					? {
-							...todo,
-							editing: !todo.editing,
-					  }
-					: todo
-			);
+			return state.map((todo) => ({
+				...todo,
+				editing: todo.id === payload.id ? !todo.editing : false,
+			}));
 
 		case DESTROY_TODO:
 			return state.filter((todo) => todo.id !== payload.id);
