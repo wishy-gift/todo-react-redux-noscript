@@ -21,6 +21,7 @@ const start = () => {
 
 	const sessionConfig = {
 		secret:
+			process.env.SESSION_SECRET ||
 			'4#ecwNjsNdcM$7yH@QGS%w4i##^W!eFZwT4xcpPYX@2aFPg7%A3bZhXja74Kvfc39zv8WwC6',
 		resave: false,
 		saveUninitialized: true,

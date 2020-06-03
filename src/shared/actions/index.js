@@ -13,8 +13,6 @@ export const VISIBILITY_FILTERS = {
 };
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
 
-export const SET_NOSCRIPT = 'SET_NOSCRIPT';
-
 export const addTodo = (payload) => ({
 	type: ADD_TODO,
 	payload,
@@ -50,10 +48,5 @@ export const clearCompletedTodos = () => ({
 
 export const setVisibilityFilter = (payload) => ({
 	type: SET_VISIBILITY_FILTER,
-	payload,
-});
-
-export const setNoscript = (payload) => ({
-	type: SET_NOSCRIPT,
 	payload,
 });

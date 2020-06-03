@@ -4,21 +4,19 @@ import { Provider } from 'react-redux';
 import App from '../../shared/components/App/App';
 import Html from '../components/Html/Html';
 import { configureStore } from '../../shared/store/configureStore';
-import { setNoscript } from '../../shared/actions';
 
 const serverRenderer = (isNoscript) => (req, res) => {
-	const initialState = req.session.state || { app: { isNoscript } };
+	const initialState = req.session.state || {};
 
 	const store = configureStore({ initialState });
-	const currentState = store.getState();
+
+	let state = initialState;
 
 	if (isNoscript) {
-		if (!currentState.app.isNoscript) {
-			store.dispatch(setNoscript(true));
-		}
-
 		const { type, payload, payloadType } = req.body;
 
+		// in a production scenario, you might validate input a bit more
+		// and perhaps have a validator per action
 		if (type && typeof type === 'string') {
 			try {
 				let parsedPayload;
@@ -32,30 +30,15 @@ const serverRenderer = (isNoscript) => (req, res) => {
 
 				store.dispatch({ type, payload: parsedPayload });
 
-				req.session.state = store.getState();
-			} catch (error) {}
+				state = store.getState();
+				req.session.state = state;
+			} catch (error) {
+				// probably something malformed or malicious
+			}
 		}
-	} else if (currentState.app.isNoscript) {
-		store.dispatch(setNoscript(false));
-		req.session.state = store.getState();
 	}
 
-	let state;
-	let content;
-
-	if (!isNoscript) {
-		state = JSON.stringify(req.session.state);
-
-		content = renderToString(
-			<Provider store={store}>
-				<App />
-			</Provider>
-		);
-
-		store.dispatch(setNoscript(true));
-	}
-
-	const noScriptContent = renderToStaticMarkup(
+	const content = renderToString(
 		<Provider store={store}>
 			<App />
 		</Provider>
@@ -67,10 +50,8 @@ const serverRenderer = (isNoscript) => (req, res) => {
 				<Html
 					css={['/static/client.css']}
 					scripts={['/static/client.js']}
-					isNoscript={isNoscript}
 					state={state}
 					content={content}
-					noScriptContent={noScriptContent}
 				/>
 			)
 	);
