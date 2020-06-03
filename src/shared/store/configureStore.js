@@ -2,7 +2,7 @@ import { createStore } from 'redux';
 import rootReducer from '../reducers/rootReducer';
 
 export const configureStore = ({ initialState = null }) => {
-	const store = createStore(rootReducer, initialState);
+	const store = createStore(rootReducer, initialState || {});
 
 	if (process.env.NODE_ENV !== 'production') {
 		if (module.hot) {

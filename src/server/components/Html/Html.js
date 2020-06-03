@@ -17,12 +17,14 @@ const HTML = ({
 				{css.filter(Boolean).map((href) => (
 					<link key={href} rel="stylesheet" href={href} />
 				))}
-				<script
-					// eslint-disable-next-line react/no-danger
-					dangerouslySetInnerHTML={{
-						__html: `window.__INITIAL_STATE__ = ${devalue(state)}`,
-					}}
-				/>
+				{state && !isNoscript && (
+					<script
+						// eslint-disable-next-line react/no-danger
+						dangerouslySetInnerHTML={{
+							__html: `window.__INITIAL_STATE__ = ${devalue(state)}`,
+						}}
+					/>
+				)}
 			</head>
 			<body>
 				{/* eslint-disable-next-line react/no-danger */}

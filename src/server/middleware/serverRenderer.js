@@ -6,11 +6,8 @@ import Html from '../components/Html/Html';
 import { configureStore } from '../../shared/store/configureStore';
 
 const serverRenderer = (isNoscript) => (req, res) => {
-	const initialState = req.session.state || {};
-
-	const store = configureStore({ initialState });
-
-	let state = initialState;
+	const state = req.session.state;
+	const store = configureStore({ initialState: state });
 
 	if (isNoscript) {
 		const { type, payload, payloadType } = req.body;
@@ -30,10 +27,9 @@ const serverRenderer = (isNoscript) => (req, res) => {
 
 				store.dispatch({ type, payload: parsedPayload });
 
-				state = store.getState();
-				req.session.state = state;
+				req.session.state = store.getState();
 			} catch (error) {
-				// probably something malformed or malicious
+				// probably something malformed or malicious 🤷‍♂️
 			}
 		}
 	}
@@ -50,6 +46,7 @@ const serverRenderer = (isNoscript) => (req, res) => {
 				<Html
 					css={['/static/client.css']}
 					scripts={['/static/client.js']}
+					isNoscript={isNoscript}
 					state={state}
 					content={content}
 				/>
