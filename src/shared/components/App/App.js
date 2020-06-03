@@ -42,6 +42,8 @@ const App = ({ todos, visibilityFilter }) => {
 			break;
 	}
 
+	const allTodosChecked = todos.length && !incompleteTodosCount;
+
 	return (
 		<section className="todoapp">
 			<header className="header">
@@ -66,11 +68,9 @@ const App = ({ todos, visibilityFilter }) => {
 			<section className="main">
 				<Button
 					wrapperClassName={classNames('toggle-all-wrapper', {
-						checked: todos.length && !incompleteTodosCount,
+						checked: allTodosChecked,
 					})}
-					className={classNames('toggle-all', {
-						checked: todos.length && !incompleteTodosCount,
-					})}
+					className="toggle-all"
 					action={toggleAllTodos()}
 				/>
 				<ul className="todo-list">
@@ -87,9 +87,7 @@ const App = ({ todos, visibilityFilter }) => {
 									wrapperClassName={classNames('toggleWrapper', {
 										checked: completed,
 									})}
-									className={classNames('toggle', {
-										checked: completed,
-									})}
+									className="toggle"
 									action={toggleTodo({ id })}
 								/>
 								<label>{text}</label>
@@ -125,7 +123,7 @@ const App = ({ todos, visibilityFilter }) => {
 			<footer className="footer">
 				<span className="todo-count">
 					<strong>{incompleteTodosCount}</strong>
-					{incompleteTodosCount.length === 1 ? ' item ' : ' items '}
+					{incompleteTodosCount === 1 ? ' item ' : ' items '}
 					left
 				</span>
 				<ul className="filters">

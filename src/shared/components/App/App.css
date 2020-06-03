@@ -143,7 +143,7 @@ form {
 	padding: 10px 27px 10px 27px;
 }
 
-.toggle-all.checked:before {
+.toggle-all-wrapper.checked .toggle-all:before {
 	color: #737373;
 }
 
