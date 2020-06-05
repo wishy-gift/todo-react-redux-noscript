@@ -45,7 +45,9 @@ const HTML = ({
 					</p>
 					<p>
 						{`Check out the source code on `}
-						<a href="">GitHub</a>
+						<a href="https://github.com/wishy-gift/todo-react-redux-noscript">
+							GitHub
+						</a>
 					</p>
 				</footer>
 			</body>
